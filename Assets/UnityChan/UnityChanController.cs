@@ -102,7 +102,7 @@ public class UnityChanController : MonoBehaviour
 
     bool IsGroundCheck()
     {
-       List<ContactPoint2D> contacts = new List<ContactPoint2D>();;
+        List<ContactPoint2D> contacts = new List<ContactPoint2D>();
         this.myCapsuleCollider2D.GetContacts(contacts);
 
         foreach ( ContactPoint2D contact in contacts )

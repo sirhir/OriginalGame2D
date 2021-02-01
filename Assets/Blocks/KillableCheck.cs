@@ -1,42 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class KillableCheck : MonoBehaviour
 {
+    private float previousTime;
     private Vector3 previousPosition;
-    private float moveAmount;
-    public bool killable = false;
+    private float passedTime;
 
-    private int freq = 16;
-    private int f;
+    private float freq = 0.5f;
 
     void Start()
     {
-        f=0;
-        moveAmount = 0.0f;
+        previousTime = 0.0f;
         previousPosition = this.transform.position;
     }
 
     void Update()
     {
-        if(f<freq)
+        passedTime = Time.time - previousTime;
+        if( passedTime > freq) 
         {
-            f++;
+            previousTime = Time.time;
+            previousPosition = this.transform.position;
+        }
+    }
+
+    public bool Killable()
+    {
+        if ( ( this.transform.position - previousPosition ).sqrMagnitude / passedTime > 3.0f )
+        {
+            return true;
         }
         else
         {
-            moveAmount = ( this.transform.position - previousPosition ).sqrMagnitude / Time.deltaTime;
-            if ( moveAmount > 16.0f )
-            {
-                killable = true;
-            }
-            else
-            {
-                killable = false;
-            }
-            previousPosition = this.transform.position;
-            f=0;
+            return false;
         }
     }
 }

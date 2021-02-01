@@ -13,8 +13,8 @@ public class UnityChanController : MonoBehaviour
     private bool isGround = true;
     private int flightProcessingTime = 0;
 
-    private float horizonAccelerationGround = 16.0f;
-    private float horizonAccelerationAir = 8.0f;
+    private float horizonAccelerationGround = 20.0f;
+    private float horizonAccelerationAir = 10.0f;
     private float maxHorizonVelocityGround = 3.0f;
     private float maxHorizonVelocityAir = 1.5f;
     private float horizonAcceleration;
@@ -83,7 +83,7 @@ public class UnityChanController : MonoBehaviour
         //動作不安定
         //結局スクリプト追加してブール値もってこよ
         if ( other.gameObject.GetComponent<KillableCheck>() != null ){
-            if ( other.gameObject.GetComponent<KillableCheck>().killable )
+            if ( other.gameObject.GetComponent<KillableCheck>().Killable() )
             {
                 GameObject dying = Instantiate(dyingUnityChan);
                 dying.transform.position = this.transform.position;

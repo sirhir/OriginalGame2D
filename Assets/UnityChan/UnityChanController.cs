@@ -13,8 +13,8 @@ public class UnityChanController : MonoBehaviour
     private bool isGround = true;
     private int flightProcessingTime = 0;
 
-    private float horizonAccelerationGround = 0.04f;
-    private float horizonAccelerationAir = 0.02f;
+    private float horizonAccelerationGround = 16.0f;
+    private float horizonAccelerationAir = 8.0f;
     private float maxHorizonVelocityGround = 3.0f;
     private float maxHorizonVelocityAir = 1.5f;
     private float horizonAcceleration;
@@ -116,7 +116,7 @@ public class UnityChanController : MonoBehaviour
             {
                 myRigidbody2D.velocity = new Vector2
                 (
-                    myRigidbody2D.velocity.x + horizonAcceleration*-1
+                    myRigidbody2D.velocity.x + horizonAcceleration * Time.deltaTime * -1
                     ,myRigidbody2D.velocity.y
                 );
             }
@@ -126,7 +126,7 @@ public class UnityChanController : MonoBehaviour
             {
                 myRigidbody2D.velocity = new Vector2
                 (
-                    myRigidbody2D.velocity.x + horizonAcceleration
+                    myRigidbody2D.velocity.x + horizonAcceleration * Time.deltaTime
                     ,myRigidbody2D.velocity.y
                 );
             }

@@ -77,17 +77,19 @@ public class UnityChanController : MonoBehaviour
         return false;
     }
 
-
     void OnCollisionEnter2D(Collision2D other)
     {
         //Debug.Log(other.rigidbody?.velocity.sqrMagnitude);
         //動作不安定
-        if ( other.rigidbody?.velocity.sqrMagnitude > 4.0f )
-        {
-            GameObject dying = Instantiate(dyingUnityChan);
-            dying.transform.position = this.transform.position;
-            dying.GetComponent<SpriteRenderer>().flipX = this.mySpriteRenderer.flipX;
-            Destroy(this.gameObject);
+        //結局スクリプト追加してブール値もってこよ
+        if ( other.gameObject.GetComponent<KillableCheck>() != null ){
+            if ( other.gameObject.GetComponent<KillableCheck>().killable )
+            {
+                GameObject dying = Instantiate(dyingUnityChan);
+                dying.transform.position = this.transform.position;
+                dying.GetComponent<SpriteRenderer>().flipX = this.mySpriteRenderer.flipX;
+                Destroy(this.gameObject);
+            }
         }
     }
 

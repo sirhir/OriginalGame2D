@@ -17,6 +17,8 @@ public class UnityChanController : MonoBehaviour
     private float horizonAccelerationAir = 0.02f;
     private float maxHorizonVelocityGround = 3.0f;
     private float maxHorizonVelocityAir = 1.5f;
+    private float horizonAcceleration;
+    private float maxHorizonVelocity;
 
     void Start()
     {
@@ -97,9 +99,6 @@ public class UnityChanController : MonoBehaviour
     {
         //加速度与えた方向へキャラを向き直す
         this.mySpriteRenderer.flipX = clickLeft;
-
-        float horizonAcceleration;
-        float maxHorizonVelocity;
         if (isGround)
         {
             horizonAcceleration = horizonAccelerationGround;

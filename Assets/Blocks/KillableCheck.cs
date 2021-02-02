@@ -1,32 +1,52 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class KillableCheck : MonoBehaviour
 {
-    private float previousTime;
-    private Vector3 previousPosition;
-    private float passedTime;
+    private struct coords
+    {
+        private Vector3 pos;
+        public Vector3 Pos
+        {
+            get { return pos;}
+            set { pos = value; }
+        }
+        private float tm;
+        public float Tm
+        {
+            get { return tm; }
+            set { tm = value; }
+        }
+    };
+    private coords current;
 
     private float freq = 0.5f;
+    private float threshold = 3.0f;
+    
 
-    void Start()
+    Queue<coords> q = new Queue<coords>();
+    
+
+    void start()
     {
-        previousTime = 0.0f;
-        previousPosition = this.transform.position;
+ 
     }
 
     void Update()
     {
-        passedTime = Time.time - previousTime;
-        if( passedTime > freq) 
+        current.Pos = this.transform.position;
+        current.Tm = Time.time;
+        q.Enqueue(current);
+
+        if ( Time.time - q.Peek().Tm > freq )
         {
-            previousTime = Time.time;
-            previousPosition = this.transform.position;
+            q.Dequeue();
         }
     }
 
     public bool Killable()
     {
-        if ( ( this.transform.position - previousPosition ).sqrMagnitude / passedTime > 3.0f )
+        if ( ( this.transform.position - q.Peek().Pos ).sqrMagnitude > threshold )
         {
             return true;
         }

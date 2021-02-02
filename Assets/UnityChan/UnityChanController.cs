@@ -79,7 +79,14 @@ public class UnityChanController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        //Debug.Log(other.rigidbody?.velocity.sqrMagnitude);
+        // Debug.Log(other.rigidbody?.velocity.sqrMagnitude);
+        // if(other.rigidbody?.velocity.sqrMagnitude > 1.0f){
+        //     GameObject dying = Instantiate(dyingUnityChan);
+        //     dying.transform.position = this.transform.position;
+        //     dying.GetComponent<SpriteRenderer>().flipX = this.mySpriteRenderer.flipX;
+        //     Destroy(this.gameObject);
+        // }
+
         //動作不安定
         //結局スクリプト追加してブール値もってこよ
         if ( other.gameObject.GetComponent<KillableCheck>() != null ){

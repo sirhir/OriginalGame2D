@@ -16,6 +16,10 @@ public class StageScript : MonoBehaviour
     public GameObject GameOverCanvas;
     public GameObject ClearCanvas;
 
+    public AudioClip startSound;
+    public AudioClip gameOverSound;
+    public AudioClip clearSound;
+
     private state gameState;
 
     void Start()
@@ -31,6 +35,7 @@ public class StageScript : MonoBehaviour
         {
             if ( gameState == state.start )
             {
+                GetComponent<AudioSource>().PlayOneShot(startSound, 0.3f);
                 Destroy(this.gameObject.transform.Find("StartCanvas").gameObject);
                 Instantiate(InputModulePrefab);
                 gameState = state.ingame;
@@ -50,8 +55,8 @@ public class StageScript : MonoBehaviour
 
     public void Missed()
     {
-        if (gameState == state.ingame)
-        {
+        if (gameState == state.ingame){
+            GetComponent<AudioSource>().PlayOneShot(gameOverSound, 0.1f);
             Instantiate(GameOverCanvas);
             Destroy(GameObject.FindGameObjectWithTag("InputModule"));
             gameState = state.gameover;
@@ -62,6 +67,7 @@ public class StageScript : MonoBehaviour
     {
         if (gameState == state.ingame)
         {
+            GetComponent<AudioSource>().PlayOneShot(clearSound, 0.2f);
             Instantiate(ClearCanvas);
             Destroy(GameObject.FindGameObjectWithTag("InputModule"));
             gameState = state.clear;

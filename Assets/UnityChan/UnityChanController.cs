@@ -39,6 +39,16 @@ public class UnityChanController : MonoBehaviour
         if ( isGround ){
             flightProcessingTime = 0;
             this.myAnimator.SetBool("Ground", isGround);
+
+            if ( Mathf.Abs(this.myRigidbody2D.velocity.x) < 0.6)
+            {
+                this.myAnimator.SetBool("Run", false);
+            }
+            else
+            {
+                this.myAnimator.SetBool("Run", true);
+            }
+
         }
         else
         {
@@ -49,14 +59,6 @@ public class UnityChanController : MonoBehaviour
             }
         }
 
-        if ( Mathf.Abs(this.myRigidbody2D.velocity.x) < 0.6)
-        {
-            this.myAnimator.SetBool("Run", false);
-        }
-        else
-        {
-            this.myAnimator.SetBool("Run", true);
-        }
     }
 
     bool IsGroundCheck()
@@ -79,16 +81,6 @@ public class UnityChanController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        // Debug.Log(other.rigidbody?.velocity.sqrMagnitude);
-        // if(other.rigidbody?.velocity.sqrMagnitude > 1.0f){
-        //     GameObject dying = Instantiate(dyingUnityChan);
-        //     dying.transform.position = this.transform.position;
-        //     dying.GetComponent<SpriteRenderer>().flipX = this.mySpriteRenderer.flipX;
-        //     Destroy(this.gameObject);
-        // }
-
-        //動作不安定
-        //結局スクリプト追加してブール値もってこよ
         if ( other.gameObject.GetComponent<KillableCheck>() != null ){
             if ( other.gameObject.GetComponent<KillableCheck>().Killable() )
             {

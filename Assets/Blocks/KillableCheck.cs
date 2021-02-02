@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class KillableCheck : MonoBehaviour
 {
+    public AudioClip killableCollisionSound;
+
+
     private struct coords
     {
         private Vector3 pos;
@@ -20,8 +23,8 @@ public class KillableCheck : MonoBehaviour
     };
     private coords current;
 
-    private float freq = 0.5f;
-    private float threshold = 3.0f;
+    private float freq = 0.2f;
+    private float threshold = 1.2f;
     
 
     Queue<coords> q = new Queue<coords>();
@@ -41,6 +44,14 @@ public class KillableCheck : MonoBehaviour
         if ( Time.time - q.Peek().Tm > freq )
         {
             q.Dequeue();
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if ( this.Killable() )
+        {
+            GetComponent<AudioSource>().PlayOneShot(killableCollisionSound, 0.1f);
         }
     }
 

@@ -2,8 +2,10 @@
 
 public class ObjectController : MonoBehaviour
 {
+    public AudioClip destructSound;
+
     private bool SelfDestructFlag = false;
-    private Vector3 shrinkScale = new Vector3(-1.0f, -1.0f, -1.0f);
+    private Vector3 shrinkScale = new Vector3(-0.5f, -0.5f, -0.5f);
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,9 @@ public class ObjectController : MonoBehaviour
     ///</summary>
     public void ClickEvent()
     {
+        if (SelfDestructFlag != true){
+            GetComponent<AudioSource>().PlayOneShot(destructSound, 0.1f);
+        }
         SelfDestructFlag = true;
     }
 }

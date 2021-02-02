@@ -20,17 +20,17 @@ public class DyingUnityChan : MonoBehaviour
         myRenderer.material.color = GetAlphaColor(myRenderer.material.color);
 
 
-        if (time > 3.0f)
+        if (time > 2.4f)
         {
             Destroy(this.gameObject);
         }
-        if (time > 1.0f)
+        if (time > 0.4f)
         {
             GameObject.Find("GameManager").GetComponent<StageScript>().Missed();
             GetComponent<ParticleSystem>().Play();
             myRenderer.sprite = null;
         }
-        else if (time > 0.5f)
+        else if (time > 0.2f)
         {
             myRenderer.sprite = sprite;
         }

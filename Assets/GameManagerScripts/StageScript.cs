@@ -27,7 +27,6 @@ public class StageScript : MonoBehaviour
         gameState = state.start;
     }
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -35,10 +34,7 @@ public class StageScript : MonoBehaviour
         {
             if ( gameState == state.start )
             {
-                GetComponent<AudioSource>().PlayOneShot(startSound, 0.3f);
-                Destroy(this.gameObject.transform.Find("StartCanvas").gameObject);
-                Instantiate(InputModulePrefab);
-                gameState = state.ingame;
+                StageStart();
             }
 
             if ( gameState == state.gameover)
@@ -53,12 +49,27 @@ public class StageScript : MonoBehaviour
         }
     }
 
+    void StageStart()
+    {
+        GetComponent<AudioSource>().PlayOneShot(startSound, 0.2f);
+        Destroy(this.gameObject.transform.Find("StartCanvas").gameObject);
+        Instantiate(InputModulePrefab);
+        gameState = state.ingame;
+    }
+
     public void Missed()
     {
         if (gameState == state.ingame){
             GetComponent<AudioSource>().PlayOneShot(gameOverSound, 0.1f);
             Instantiate(GameOverCanvas);
             Destroy(GameObject.FindGameObjectWithTag("InputModule"));
+            gameState = state.gameover;
+        }
+        else if (gameState == state.start)
+        {
+            GetComponent<AudioSource>().PlayOneShot(gameOverSound, 0.1f);
+            Instantiate(GameOverCanvas);
+            Destroy(this.gameObject.transform.Find("StartCanvas").gameObject);
             gameState = state.gameover;
         }
     }
@@ -70,6 +81,13 @@ public class StageScript : MonoBehaviour
             GetComponent<AudioSource>().PlayOneShot(clearSound, 0.2f);
             Instantiate(ClearCanvas);
             Destroy(GameObject.FindGameObjectWithTag("InputModule"));
+            gameState = state.clear;
+        }
+        else if (gameState == state.start)
+        {
+            GetComponent<AudioSource>().PlayOneShot(clearSound, 0.2f);
+            Instantiate(ClearCanvas);
+            Destroy(this.gameObject.transform.Find("StartCanvas").gameObject);
             gameState = state.clear;
         }
     }

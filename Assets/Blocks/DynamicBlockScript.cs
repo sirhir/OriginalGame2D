@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class KillableCheck : MonoBehaviour
+public class DynamicBlockScript : MonoBehaviour
 {
     public AudioClip killableCollisionSound;
-
 
     private struct coords
     {
@@ -24,16 +23,11 @@ public class KillableCheck : MonoBehaviour
     private coords current;
 
     private float freq = 0.2f;
-    private float threshold = 1.2f;
+    //freqタイム内にthreshold以上の位置変化量なら致命的物体
+    private float threshold = 0.8f; 
     
-
     Queue<coords> q = new Queue<coords>();
-    
-
-    void start()
-    {
  
-    }
 
     void Update()
     {
@@ -52,18 +46,26 @@ public class KillableCheck : MonoBehaviour
         if ( this.Killable() )
         {
             GetComponent<AudioSource>().PlayOneShot(killableCollisionSound, 0.1f);
+            if ( other.gameObject.tag == "PlayChara" )
+            {
+                other.gameObject.GetComponent<UnityChanController>().KillUnityChan();
+            }
+            else if ( other.gameObject.tag == "Enemy")
+            {
+                other.gameObject.GetComponent<EnemyScript>().KillEnemy();
+            }
         }
     }
 
-    public bool Killable()
+    bool Killable()
     {
-        if ( ( this.transform.position - q.Peek().Pos ).sqrMagnitude > threshold )
-        {
-            return true;
+        if (q.Count > 0){
+            //Debug.Log((this.transform.position - q.Peek().Pos ).sqrMagnitude);
+            if ( ( this.transform.position - q.Peek().Pos ).sqrMagnitude > threshold )
+            {
+                return true;
+            }
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 }

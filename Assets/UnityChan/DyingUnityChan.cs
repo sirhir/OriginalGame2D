@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DyingUnityChan : MonoBehaviour
 {
@@ -24,7 +22,7 @@ public class DyingUnityChan : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        if (time > 0.4f)
+        else if (time > 0.4f)
         {
             GameObject.Find("GameManager").GetComponent<StageScript>().Missed();
             GetComponent<ParticleSystem>().Play();

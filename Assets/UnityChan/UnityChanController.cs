@@ -11,7 +11,7 @@ public class UnityChanController : MonoBehaviour
     private CapsuleCollider2D myCapsuleCollider2D;
 
     private bool isGround = true;
-    private int flightProcessingTime = 0;
+    private float flightProcessingTime = 0.0f;
 
     private float horizonAccelerationGround = 20.0f;
     private float horizonAccelerationAir = 10.0f;
@@ -37,7 +37,7 @@ public class UnityChanController : MonoBehaviour
     void AnimationAdaptor()
     {
         if ( isGround ){
-            flightProcessingTime = 0;
+            flightProcessingTime = 0.0f;
             this.myAnimator.SetBool("Ground", isGround);
 
             if ( Mathf.Abs(this.myRigidbody2D.velocity.x) < 0.6)
@@ -48,12 +48,11 @@ public class UnityChanController : MonoBehaviour
             {
                 this.myAnimator.SetBool("Run", true);
             }
-
         }
         else
         {
-            flightProcessingTime++;
-            if ( flightProcessingTime > 60 )
+            flightProcessingTime += Time.deltaTime;
+            if ( flightProcessingTime > 0.1f )
             {
                 this.myAnimator.SetBool("Ground", isGround);
             }
@@ -77,19 +76,6 @@ public class UnityChanController : MonoBehaviour
         }
 
         return false;
-    }
-
-    void OnCollisionEnter2D(Collision2D other)
-    {
-        if ( other.gameObject.GetComponent<KillableCheck>() != null ){
-            if ( other.gameObject.GetComponent<KillableCheck>().Killable() )
-            {
-                GameObject dying = Instantiate(dyingUnityChan);
-                dying.transform.position = this.transform.position;
-                dying.GetComponent<SpriteRenderer>().flipX = this.mySpriteRenderer.flipX;
-                Destroy(this.gameObject);
-            }
-        }
     }
 
     ///<summary>
@@ -132,6 +118,14 @@ public class UnityChanController : MonoBehaviour
                 );
             }
         }
+    }
+
+    public void KillUnityChan()
+    {
+        GameObject dying = Instantiate(dyingUnityChan);
+        dying.transform.position = this.transform.position;
+        dying.GetComponent<SpriteRenderer>().flipX = this.mySpriteRenderer.flipX;
+        Destroy(this.gameObject);
     }
 
 }

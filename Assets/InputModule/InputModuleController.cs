@@ -27,9 +27,13 @@ public class InputModuleController : MonoBehaviour
             }
             else
             {
-                if ( myCollider2D.tag == "ClickEventObject" )
+                if ( myCollider2D.tag == "BreakableBlock" || myCollider2D.tag == "DynamicBreakableBlock" )
                 {
-                    myCollider2D.GetComponent<ObjectController>().ClickEvent();
+                    myCollider2D.GetComponent<BreakableBlockScript>().ClickEvent();
+                }
+                else if(myCollider2D.tag == "BlastBlock" && myCollider2D.GetComponent<BoxCollider2D>().isTrigger == false)
+                {
+                    myCollider2D.GetComponent<BlastBlockScript>().ClickEvent();
                 }
                 else
                 {

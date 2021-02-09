@@ -11,10 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Stage1.unity
     guid: 5dcf0497b0758eb4fb62951349fbbb6f
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Stage2.unity
     guid: a8d21fce41a3bcd468e53e326e1f895f
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Sunaba.unity
     guid: 41c9c2b785324f149b68fc4d841d25e9
   m_configObjects: {}

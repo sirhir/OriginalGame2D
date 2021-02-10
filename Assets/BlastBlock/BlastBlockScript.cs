@@ -35,6 +35,11 @@ public class BlastBlockScript : MonoBehaviour
             this.GetComponent<AudioSource>().PlayOneShot(destructSound, 0.1f);
             Destroy(this.GetComponent<SpriteRenderer>());
             this.GetComponent<BoxCollider2D>().isTrigger = true;
+            this.GetComponent<BoxCollider2D>().size = new Vector2
+            (
+                this.GetComponent<BoxCollider2D>().size.x * 1.2f,
+                this.GetComponent<BoxCollider2D>().size.y * 1.2f
+            );
             //パーティクル再生
             this.GetComponent<ParticleSystem>().Play();
             SelfDestructFlag = true;
@@ -47,11 +52,7 @@ public class BlastBlockScript : MonoBehaviour
         if (SelfDestructFlag && other.gameObject.GetComponent<Rigidbody2D>() != null)
         {
             Vector2 temp = other.gameObject.transform.position - this.transform.position;
-            other.gameObject.GetComponent<Rigidbody2D>().velocity += temp * 30.0f * this.transform.localScale.z;
-            //vector3 temp = other.gameObject.transform.position - this.transform.position;
-
-            //other.gameObject.GetComponent<Rigidbody2D>();
-            //otherにリジッドボディがあるなら放射方向に加速させる
+            other.gameObject.GetComponent<Rigidbody2D>().velocity += temp * this.transform.localScale.z * 16.0f;
         }
     }
 }

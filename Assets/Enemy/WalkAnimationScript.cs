@@ -18,7 +18,7 @@ public class WalkAnimationScript : StateMachineBehaviour
     {
         if( animator.GetComponent<AudioSource>().isPlaying != true )
         {
-            animator.GetComponent<AudioSource>().PlayOneShot(enemyWalkSound, 0.05f);
+            animator.GetComponent<AudioSource>().PlayOneShot(enemyWalkSound, 0.02f);
         }
     }
 

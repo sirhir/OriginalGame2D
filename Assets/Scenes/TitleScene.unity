@@ -442,7 +442,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -90, y: 30}
+  m_AnchoredPosition: {x: -90, y: 50}
   m_SizeDelta: {x: 160, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1623492935
@@ -471,13 +471,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 40
-    m_Alignment: 5
+    m_Alignment: 8
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Thanks to\n\xA9 Unity Technologies Japan/UCL\nrosemilktea.booth.pm\nsoundeffect-lab.info\nicooon-mono.com\nyamatogk.blogspot.com"
+  m_Text: "Thanks to\n\xA9 Unity Technologies Japan/UCL\nrosemilktea.booth.pm\nsoundeffect-lab.info\nicooon-mono.com\nyamatogk.blogspot.com\nfukidesign.com"
 --- !u!222 &1623492936
 CanvasRenderer:
   m_ObjectHideFlags: 0

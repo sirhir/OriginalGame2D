@@ -7,6 +7,8 @@ public class BlastBlockScript : MonoBehaviour
     private bool SelfDestructFlag = false;
 
     private float destructTimer;
+
+    private float destructColliderSpan = 0.2f;
     private float destructSpan = 0.8f;
 
     void start()
@@ -19,6 +21,12 @@ public class BlastBlockScript : MonoBehaviour
         if (SelfDestructFlag)
         {
             destructTimer += Time.deltaTime;
+
+            if (destructTimer>destructColliderSpan)
+            {
+                Destroy(this.GetComponent<BoxCollider2D>());
+            }
+
             if (destructTimer>destructSpan)
             {
                 Destroy(this.gameObject);
